@@ -112,6 +112,16 @@ Seen: **12.8Mbps / 15.3MB → CRF23 / 2.4MB at native 1080p**, near-original. **
 | console error → Best Practices | Usually the flaky media (#5). Otherwise read `mcp__chrome-devtools__list_console_messages` and fix at source. |
 | render-blocking `registerSW.js` | vite-plugin-pwa: `injectRegister: 'script-defer'`. |
 
+### 7. SPA indexability — private routes leak into the index with the homepage's meta
+
+A client-rendered SPA serves the _same_ `index.html` (same `<title>`/meta) for **every** route, so Google can crawl a private route (`/admin`, `/settings`), get a 200 + the homepage title, index it — and sometimes rank it **above** the homepage for your brand. A clicked result then dumps the user on an auth wall / redirect.
+
+- **`Disallow:` in robots.txt does NOT remove an already-indexed URL.** It only blocks crawling, so Google can never re-crawl to see a `noindex` → the URL stays **stuck** in results. This is the trap (we hit it with `/admin`).
+- **Fix: `noindex`, not `Disallow`.** (1) Do **not** robots-`Disallow` the private SPA routes. (2) Serve `X-Robots-Tag: noindex` for them via host headers (Cloudflare Pages / Netlify `_headers`, e.g. `/admin` → `X-Robots-Tag: noindex`). Google crawls, sees `noindex`, drops them. (3) Keep robots `Disallow` only for non-HTML (`/api`). (4) Immediate removal of an already-stuck URL → Search Console **Removals** (no public API — manual).
+- **Favicon: Google circle-crops it.** An edge-to-edge logo SVG looks cropped/oversized. Point `<link rel="icon">` at a **padded** icon (logo ~70% + solid bg), not the bare logomark.
+- **Add JSON-LD** (`Organization` / `WebSite` / `SoftwareApplication`) to `index.html` — cheap entity signal + rich-result eligibility.
+- **Bigger lever (separate effort): prerender the guest routes.** Even with perfect meta, a client-rendered body means Googlebot sees an empty `<div id="root">`; the static `<title>` is why it _has_ a title, but the content is JS-rendered → weak ranking for a new domain. Lighthouse won't flag this (it executes JS), but organic ranking suffers — SSG/prerender the public routes for the real win.
+
 ## CLS Safety — do not regress the Core Web Vital
 
 - **Lazy sections: exact placeholder heights are impossible** (responsive, viewport-dependent). The real protection is **off-screen load**: small section chunks load in parallel right after the entry and render *while the user is still on the Hero* → shifts happen below the fold → CLS weight ≈ 0. Use a rough `min-h-[Nvh]` reserve just so the page isn't collapsed; **don't chase exact heights**. **Verify CLS = 0.00** after.
