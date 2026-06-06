@@ -12,6 +12,10 @@ A small panel of agents with different viewpoints argues a question out, then a 
 
 How it runs: everyone answers on their own, then reads the others and pushes back, then a judge settles on an answer plus the main points of disagreement and what would change the call.
 
+### optimizing-spa-lighthouse-100
+
+Getting a client-rendered SPA landing page to 100 across the board on Lighthouse. Not the obvious advice everyone already knows, but the gotchas that actually move the needle: variable-font axes eating your critical path, below-the-fold work blocking the first paint, heavy deps leaking into the entry bundle, a flaky background video on someone else's CDN. Written down after taking a real landing from mobile 64 to all-100.
+
 ## notes
 
 Built for my own setup, so some paths and habits are specific to me. Take what's useful.
