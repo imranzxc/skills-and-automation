@@ -1,6 +1,6 @@
 ---
 name: cost-aware-runner
-description: Use when starting a nightly/autonomous run, a research sprint, an audit campaign, or any multi-item batch — and whenever choosing which model to run a task on. Encodes the evidence-based cost-vs-quality routing (frontier on cognition, Haiku on retrieval), per-item context isolation, and anti-runaway. Triggers: "nightly run", "overnight", "audit campaign", "apply the backlog", "research sprint", "which model", "run this autonomously", "batch of tasks".
+description: Use when starting a nightly/autonomous run, a research sprint, an audit campaign, or any multi-item batch — and whenever choosing which model to run a task on. Encodes the evidence-based cost-vs-quality routing (frontier on cognition, Haiku on retrieval), per-item context isolation, and anti-runaway. Triggers — "nightly run", "overnight", "audit campaign", "apply the backlog", "research sprint", "which model", "run this autonomously", "batch of tasks".
 ---
 
 # Cost-aware runner

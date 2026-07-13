@@ -1,6 +1,6 @@
 ---
 name: limit-optimizer
-description: Use when a Claude Code user is burning through their usage limits (weekly/5-hour) too fast, asks "why are my limits gone", wants to reduce token/limit consumption, or wants a usage/context/cost audit. Diagnoses from their REAL data (transcript parse + /context + /usage + /doctor), then applies evidence-based optimizations that never sacrifice quality. Triggers: "limits gone", "burning limits", "reduce usage", "usage audit", "why so expensive", "optimize claude code cost", "context too big", "hitting weekly limit".
+description: Use when a Claude Code user is burning through their usage limits (weekly/5-hour) too fast, asks "why are my limits gone", wants to reduce token/limit consumption, or wants a usage/context/cost audit. Diagnoses from their REAL data (transcript parse + /context + /usage + /doctor), then applies evidence-based optimizations that never sacrifice quality. Triggers — "limits gone", "burning limits", "reduce usage", "usage audit", "why so expensive", "optimize claude code cost", "context too big", "hitting weekly limit".
 ---
 
 # Limit optimizer
